@@ -64,7 +64,16 @@ module.exports = function(grunt) {
 		copy: {
 			all: {
 				files: [
-					{expand: true, src: ['build/public/**'], dest: 'public'}
+					{
+						expand: true,
+					 	src: ['./build/**'],
+						dest: 'public'
+					},
+					{
+						expand: true,
+						src: ['opr.node'],
+						dest: 'lib/opr.node'
+					}
 				]
 			}
 		},
@@ -76,6 +85,12 @@ module.exports = function(grunt) {
 				]
 			}
 		},
+		gyp: {
+			opr: {
+				//command: 'configure'
+				command: 'build'
+			}
+		},
 		clean: {
 			all: [
 				'build/public/js/*.js',
@@ -83,6 +98,9 @@ module.exports = function(grunt) {
 				'!build/public/js/*.min.js',
 				'public/css/*.css',
 				'public/js/*.js'
+			],
+			opr: [
+				'build/**/opr.node'
 			]
 		}
 	});
@@ -95,8 +113,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-run');
+	grunt.loadNpmTasks('grunt-node-gyp');
 
-	grunt.registerTask('default', [ 'clean:all', 'cssmin:all', 'coffee:all', 'typescript:all', 'less:all', 'copy:all']);
-	grunt.registerTask('server', [ 'clean:all', 'cssmin:all', 'coffee:all', 'typescript:all', 'less:all', 'copy:all', 'run:server']);
+	grunt.registerTask('default', [ 'clean:all', 'cssmin:all', 'coffee:all', 'typescript:all', 'less:all', 'gyp:opr', 'copy:all', 'clean:opr']);
+	grunt.registerTask('server', [ 'clean:all', 'cssmin:all', 'coffee:all', 'typescript:all', 'less:all', 'gyp:opr', 'copy:all', 'clean:opr', 'run:server']);
 
 };

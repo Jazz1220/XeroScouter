@@ -41,10 +41,11 @@
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ecf0f1;
 }
-.navbar-default .navbar-collapse,
+.navbar-default .navbar-collapse,.
 .navbar-default .navbar-form {
   border-color: #ecf0f1;
-}
+}  color: #ecf0f1;
+
 .navbar-default .navbar-link {
   color: #ecf0f1;
 }
